@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-xl font-bold mb-4">Update Leave</h2>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="leave_type" class="block">Leave Type</label>
+            <input type="text" id="leave_type" name="leave_type" class="w-full p-2 border rounded" value="{{ leave.leave_type }}" required>
+        </div>
+        <div>
+            <label for="start_date" class="block">Start Date</label>
+            <input type="date" id="start_date" name="start_date" class="w-full p-2 border rounded" value="{{ leave.start_date }}" required>
+        </div>
+        <div>
+            <label for="end_date" class="block">End Date</label>
+            <input type="date" id="end_date" name="end_date" class="w-full p-2 border rounded" value="{{ leave.end_date }}" required>
+        </div>
+        <div>
+            <label for="status" class="block">Status</label>
+            <select id="status" name="status" class="w-full p-2 border rounded">
+                <option value="pending" {% if leave.status == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="approved" {% if leave.status == 'approved' %}selected{% endif %}>Approved</option>
+                <option value="rejected" {% if leave.status == 'rejected' %}selected{% endif %}>Rejected</option>
+            </select>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Update Leave</button>
+    </form>
+</div>
+{% endblock %}

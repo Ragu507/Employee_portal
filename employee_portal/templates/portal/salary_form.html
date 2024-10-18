@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-xl font-bold mb-4">Create Salary</h2>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="employee" class="block">Employee</label>
+            <select id="employee" name="employee" class="w-full p-2 border rounded" required>
+                <option value="">Select Employee</option>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}">{{ employee.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="month" class="block">Month</label>
+            <input type="number" id="month" name="month" class="w-full p-2 border rounded" required>
+        </div>
+        <div>
+            <label for="year" class="block">Year</label>
+            <input type="number" id="year" name="year" class="w-full p-2 border rounded" required>
+        </div>
+        <div>
+            <label for="amount" class="block">Amount</label>
+            <input type="number" id="amount" name="amount" class="w-full p-2 border rounded" required>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Create Salary</button>
+    </form>
+</div>
+{% endblock %}

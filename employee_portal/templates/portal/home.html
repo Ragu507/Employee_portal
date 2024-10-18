@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Employee Portal{% endblock %}
+
+{% block content %}
+  <h1 class="text-2xl font-semibold mb-4">Welcome to the Employee Portal</h1>
+  <p class="text-gray-700 mb-6">
+    This is your dashboard where you can manage tasks, leaves, and salaries. Use the navigation bar to access the different sections.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-blue-500 text-white p-6 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">Employees</h2>
+      <p class="text-3xl font-bold">{{ employee_count }}</p>
+    </div>
+    <div class="bg-green-500 text-white p-6 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">Pending Tasks</h2>
+      <p class="text-3xl font-bold">{{ pending_task_count }}</p>
+    </div>
+    <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">In Progress Tasks</h2>
+      <p class="text-3xl font-bold">{{ in_progress_task_count }}</p>
+    </div>
+    <div class="bg-gray-500 text-white p-6 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">Completed Tasks</h2>
+      <p class="text-3xl font-bold">{{ completed_task_count }}</p>
+    </div>
+    <div class="bg-red-500 text-white p-6 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">Leaves</h2>
+      <p class="text-3xl font-bold">{{ leave_count }}</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <a href="{% url 'task_list' %}" class="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">Manage Tasks</h2>
+      <p class="text-sm">View and manage your tasks</p>
+    </a>
+    <a href="{% url 'leave_list' %}" class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">Manage Leaves</h2>
+      <p class="text-sm">Apply for or manage your leaves</p>
+    </a>
+    <a href="{% url 'salary_list' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">View Salaries</h2>
+      <p class="text-sm">Check your salary and download payslips</p>
+    </a>
+  </div>
+
+  <div class="mt-8">
+    <a href="{% url 'notification_list' %}" class="bg-gray-800 hover:bg-gray-900 text-white p-4 rounded-lg shadow-md">
+      <h2 class="text-lg font-semibold">View Notifications</h2>
+      <p class="text-sm">Check your recent notifications</p>
+    </a>
+  </div>
+{% endblock %}

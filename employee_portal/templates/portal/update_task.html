@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-xl font-bold mb-4">Update Task</h2>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label for="title" class="block">Task Title</label>
+            <input type="text" id="title" name="title" class="w-full p-2 border rounded" value="{{ task.title }}" required>
+        </div>
+        <div>
+            <label for="description" class="block">Task Description</label>
+            <textarea id="description" name="description" class="w-full p-2 border rounded" required>{{ task.description }}</textarea>
+        </div>
+        <div>
+            <label for="due_date" class="block">Due Date</label>
+            <input type="date" id="due_date" name="due_date" class="w-full p-2 border rounded" value="{{ task.due_date }}" required>
+        </div>
+        <div>
+            <label for="status" class="block">Status</label>
+            <select id="status" name="status" class="w-full p-2 border rounded">
+                <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
+            </select>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Update Task</button>
+    </form>
+</div>
+{% endblock %}

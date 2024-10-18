@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Employee Portal{% endblock %}</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="{% url 'home' %}" class="text-white text-lg font-semibold">Employee Portal</a>
+      <div>
+        <a href="{% url 'task_list' %}" class="text-gray-300 hover:text-white mx-4">Tasks</a>
+        <a href="{% url 'leave_list' %}" class="text-gray-300 hover:text-white mx-4">Leaves</a>
+        <a href="{% url 'salary_list' %}" class="text-gray-300 hover:text-white mx-4">Salaries</a>
+        <a href="{% url 'notification_list' %}" class="text-gray-300 hover:text-white mx-4">Notifications</a>
+      </div>
+      <div>
+        {% if user.is_authenticated %}
+          <span class="text-gray-300 mr-4">Hello, {{ user.username }}</span>
+          <a href="{% url 'logout' %}" class="text-gray-300 hover:text-white">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="text-gray-300 hover:text-white mx-4">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mx-auto py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+      {% block content %}
+      <!-- Page-specific content will be injected here -->
+      {% endblock %}
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 p-4 mt-8">
+    <div class="container mx-auto text-center text-gray-400">
+      &copy; 2024 Employee Portal. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

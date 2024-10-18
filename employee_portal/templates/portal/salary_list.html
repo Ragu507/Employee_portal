@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-xl font-bold mb-4">Salary List</h2>
+
+    <ul class="mb-6">
+        {% for salary in salaries %}
+        <li class="bg-gray-100 p-4 mb-3 rounded-lg">
+            <strong>{{ salary.employee.username }}</strong> - {{ salary.month }}/{{ salary.year }} - {{ salary.amount }} 
+            {% if user.is_superuser %}
+            <a href="{% url 'update_salary' salary.id %}" class="text-blue-600 ml-4">Edit</a>
+            <a href="{% url 'delete_salary' salary.id %}" class="text-red-600 ml-4">Delete</a>
+            {%endif%}
+            <a href="{% url 'download_payslip' salary.id %}" class="text-green-600 ml-4">Download Payslip</a>
+        </li>
+        {% empty %}
+        <li class="text-gray-600">No salaries found.</li>
+        {% endfor %}
+    </ul>
+    {% if user.is_superuser %}
+    <a href="{% url 'salary_create' %}" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Create New Salary</a>
+    {%endif%}
+</div>
+{% endblock %}

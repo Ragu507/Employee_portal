@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-xl font-bold mb-4">Leave List</h2>
+    
+    <h3 class="text-lg font-semibold mb-2">Pending Leaves</h3>
+    <ul class="mb-6">
+        {% for leave in leaves %}
+            {% if leave.status == 'pending' %}
+                <li class="bg-yellow-100 p-3 mb-2 rounded-lg">
+                    <strong>{{ leave.employee.username }}</strong> - {{ leave.leave_type }} ({{ leave.start_date }} to {{ leave.end_date }})
+                    <a href="{% url 'update_leave' leave.id %}" class="text-blue-600">Edit</a>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'delete_leave' leave.id %}" class="text-red-600">Delete</a>
+                    <a href="{% url 'update_leave_status' leave.id %}" class="text-green-600">Change Status</a>
+                    {%endif%}
+                </li>
+            {% endif %}
+        {%empty%}
+        <li class="text-gray-600">No leaves found.</li>
+        {% endfor %}
+    </ul>
+
+    <h3 class="text-lg font-semibold mb-2">Approved Leaves</h3>
+    <ul class="mb-6">
+        {% for leave in leaves %}
+            {% if leave.status == 'approved' %}
+                <li class="bg-green-100 p-3 mb-2 rounded-lg">
+                    <strong>{{ leave.employee.username }}</strong> - {{ leave.leave_type }} ({{ leave.start_date }} to {{ leave.end_date }})
+                    {% if user.is_superuser %}
+                    <a href="{% url 'update_leave' leave.id %}" class="text-blue-600">Edit</a>
+                    <a href="{% url 'delete_leave' leave.id %}" class="text-red-600">Delete</a>
+                    {%endif%}
+                </li>
+            {% endif %}
+        {%empty%}
+        <li class="text-gray-600">No leaves found.</li>
+        {% endfor %}
+    </ul>
+
+    <h3 class="text-lg font-semibold mb-2">Rejected Leaves</h3>
+    <ul class="mb-6">
+        {% for leave in leaves %}
+            {% if leave.status == 'rejected' %}
+                <li class="bg-red-100 p-3 mb-2 rounded-lg">
+                    <strong>{{ leave.employee.username }}</strong> - {{ leave.leave_type }} ({{ leave.start_date }} to {{ leave.end_date }})
+                    {% if user.is_superuser %}
+                    <a href="{% url 'update_leave' leave.id %}" class="text-blue-600">Edit</a>
+                    <a href="{% url 'delete_leave' leave.id %}" class="text-red-600">Delete</a>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {%empty%}
+        <li class="text-gray-600">No leaves found.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'leave_create' %}" class="bg-blue-500 text-white py-2 px-4 rounded-lg">Create New Leave</a>
+</div>
+{% endblock %}
