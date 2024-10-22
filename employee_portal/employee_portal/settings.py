@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pf=f-s--s(+x28ao@!andth-ggq6kn2vqbr6c4-3ad^sj2ym8i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['employeeportal1.pythonanywhere.com']
 
 
 # Application definition
